@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="color-scheme" content="dark"/>
+  <title>Thiệp 8/3 — Trân trọng gửi chị em trong Trung tâm</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#06080F;--bg1:#0C1022;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.68);
+
+      --gold1:#F8EBBF;--gold2:#D9B86E;--gold3:#A67A2E;
+      --rose1:#FF6AAB;--rose2:#C03E7C;
+
+      --shadow:0 32px 85px rgba(0,0,0,.70);
+      --radius:28px;
+      --stroke:rgba(255,255,255,.12);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+
+    body{
+      font-family:'DM Sans',system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 620px at 10% 15%,rgba(248,235,191,.16),transparent 55%),
+        radial-gradient(900px 520px at 82% 18%,rgba(255,106,171,.14),transparent 56%),
+        radial-gradient(760px 520px at 52% 92%,rgba(217,184,110,.10),transparent 55%),
+        linear-gradient(170deg,var(--bg0) 0%,#0D1128 55%,var(--bg1) 100%);
+      overflow:hidden;
+    }
+
+    .noise{
+      position:fixed;inset:-30%;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      opacity:.18;
+      pointer-events:none;
+      animation:dn 14s linear infinite;
+    }
+    @keyframes dn{
+      0%{transform:translate(-4%,-3%)}
+      50%{transform:translate(4%,3%)}
+      100%{transform:translate(-4%,-3%)}
+    }
+
+    .wrap{
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .card{
+      width:min(1040px,96vw);
+      border-radius:var(--radius);
+      background:linear-gradient(160deg,rgba(255,255,255,.080),rgba(255,255,255,.022));
+      border:1px solid var(--stroke);
+      box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.09);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:calc(var(--radius) + 1px);
+      padding:1px;
+      background:linear-gradient(135deg, rgba(248,235,191,.35), rgba(255,106,171,.20), rgba(217,184,110,.22));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-4px;
+      background:
+        radial-gradient(680px 420px at 18% 10%,rgba(248,235,191,.23),transparent 55%),
+        radial-gradient(680px 420px at 82% 18%,rgba(255,106,171,.19),transparent 56%);
+      filter:blur(22px);
+      opacity:.72;
+      pointer-events:none;
+    }
+
+    .grid{
+      position:absolute;inset:0;
+      background:
+        linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),
+        linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);
+      background-size:48px 48px;
+      opacity:.07;
+      mask-image:radial-gradient(closest-side,black 52%,transparent 92%);
+      -webkit-mask-image:radial-gradient(closest-side,black 52%,transparent 92%);
+      pointer-events:none;
+    }
+
+    .content{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      padding:36px 36px 22px;
+      align-items:center;
+    }
+    @media(max-width:860px){
+      .content{grid-template-columns:1fr;padding:26px 22px 16px}
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:7px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.11);
+      width:fit-content;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:500;
+      color:rgba(255,255,255,.72);
+    }
+
+    .dot{
+      width:7px;height:7px;border-radius:50%;
+      background:linear-gradient(135deg,var(--gold1),var(--gold3));
+      box-shadow:0 0 0 3px rgba(248,235,191,.12);
+      flex:0 0 auto
+    }
+
+    h1{
+      margin:16px 0 12px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(32px,4vw,50px);
+      line-height:1.04;
+      letter-spacing:-.01em;
+      font-weight:300;
+    }
+
+    .gold{
+      background:linear-gradient(135deg,var(--gold1) 0%,var(--gold2) 45%,var(--gold3) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 0 18px rgba(248,235,191,.10);
+    }
+
+    .lead{
+      font-size:15px;
+      line-height:1.85;
+      color:var(--muted);
+      max-width:56ch;
+      font-weight:300;
+    }
+
+    .quote{
+      margin-top:18px;
+      padding:15px 18px;
+      border-radius:16px;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.09);
+      color:rgba(255,255,255,.80);
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;
+      font-weight:300;
+      font-size:16px;
+      line-height:1.7;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .sig{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 16px;
+      align-items:center;
+      color:rgba(255,255,255,.68);
+      font-size:13px;
+    }
+    .sig b{color:rgba(255,255,255,.90)}
+    .sep{width:1px;height:13px;background:rgba(255,255,255,.18)}
+
+    /* Right stage */
+    .stage{
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height: 430px;
+      overflow:hidden;
+      border-radius: 22px;
+      isolation:isolate;
+    }
+    @media(max-width:860px){ .stage{min-height:360px} }
+
+    /* Premium halo layers */
+    .stage .halo{
+      position:absolute;
+      width: 420px; height: 420px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(248,235,191,.20), transparent 52%),
+        radial-gradient(circle at 70% 35%, rgba(255,106,171,.16), transparent 54%),
+        radial-gradient(circle at 55% 78%, rgba(217,184,110,.12), transparent 55%);
+      filter: blur(16px);
+      opacity:.95;
+      pointer-events:none;
+      animation: haloBreathe 4.4s ease-in-out infinite;
+      z-index:0;
+    }
+    @keyframes haloBreathe{
+      0%,100%{ transform: scale(.985); opacity:.72; }
+      50%{ transform: scale(1.06); opacity:1; }
+    }
+
+    .stage .ring{
+      position:absolute;
+      width: 520px; height: 520px;
+      border-radius: 999px;
+      background:
+        conic-gradient(
+          from 0deg,
+          rgba(248,235,191,0) 0%,
+          rgba(248,235,191,.16) 14%,
+          rgba(255,106,171,.10) 30%,
+          rgba(248,235,191,0) 50%,
+          rgba(217,184,110,.14) 68%,
+          rgba(248,235,191,0) 100%
+        );
+      filter: blur(18px);
+      opacity:.55;
+      pointer-events:none;
+      animation: ringSpin 42s linear infinite;
+      z-index:0;
+      mix-blend-mode:screen;
+    }
+    @keyframes ringSpin{
+      from{ transform: rotate(0deg) scale(1); }
+      to  { transform: rotate(360deg) scale(1); }
+    }
+
+    .stage .vignette{
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 44%, rgba(0,0,0,.42) 100%);
+      opacity:.55;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    #heartCanvas{
+      position:relative;
+      z-index:2;
+      filter:
+        drop-shadow(0 18px 45px rgba(0,0,0,.62))
+        drop-shadow(0 10px 26px rgba(255,106,171,.18));
+    }
+
+    .divLine{
+      position:relative;
+      z-index:2;
+      height:1px;
+      margin:0 36px;
+      background:linear-gradient(to right,transparent,rgba(255,255,255,.10) 30%,rgba(255,255,255,.10) 70%,transparent);
+    }
+
+    .footer{
+      position:relative;
+      z-index:2;
+      padding: 14px 36px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:rgb(255, 255, 255);
+      font-size:12px;
+    }
+    @media(max-width:860px){
+      .footer{padding:12px 22px 18px;flex-direction:column;align-items:flex-start}
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .noise, .stage .halo, .stage .ring { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <div class="wrap">
+    <main class="card" role="document" aria-label="Thiệp chúc mừng 8/3">
+      <div class="grid"></div>
+
+      <section class="content">
+        <div>
+          <div class="kicker"><span class="dot"></span> 08 · 03 · Chúc mừng Quốc tế Phụ nữ</div>
+
+          <h1>Trân trọng gửi đến<br/><span class="gold">chị em</span> trong Trung tâm</h1>
+
+          <p class="lead">
+            Nhân ngày 8/3, Tập thể nam FRM xin gửi lời chúc <b>sức khỏe</b>, <b>bình an</b> và <b>niềm vui</b> đến một nửa quan trọng không thể thiếu của Trung tâm.
+          </p>
+
+          <p class="lead">
+            Cảm ơn sự tận tâm, tinh tế và nguồn năng lượng ấm áp của chị em mỗi ngày.
+          </p>
+
+          <div class="quote">
+            Chúc chị em luôn rạng rỡ theo cách của riêng mình — vững vàng trong công việc,
+            dịu dàng với bản thân, đón nhận những điều tốt đẹp.
+          </div>
+
+          <div class="sig">
+            <span>Thân mến,</span><span class="sep"></span>
+            <span><b>Tập thể nam FRM</b></span>
+          </div>
+        </div>
+
+        <div class="stage" aria-label="Hiệu ứng trái tim 3D">
+          <div class="ring"></div>
+          <div class="halo"></div>
+          <canvas id="heartCanvas"></canvas>
+          <div class="vignette"></div>
+        </div>
+      </section>
+
+      <div class="divLine"></div>
+
+      <footer class="footer">
+        <div class="badge">
+          <span class="dot"></span>
+          <span id="timeLabel"></span>
+        </div>
+        <div style="opacity:0"></div>
+      </footer>
+    </main>
+  </div>
+
+<script>
+/* ===========================
+   Footer label
+=========================== */
+(function(){
+  const el=document.getElementById("timeLabel");
+  el.textContent = `Trân trọng kính mời chị em tham dự bữa trưa thân mật tại Tầng 5 văn phòng Công ty lúc 12:00, ngày 06/03`;
+})();
+
+/* ===========================
+   Premium 3D Heart + Slow Belt
+   - Tim xoay 1 tốc độ
+   - Chữ xoay chậm hơn riêng
+   - Vành chữ thấp hơn tim
+   ✅ Fix: Reduce motion vẫn quay chậm (không đứng)
+=========================== */
+(function(){
+  const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const canvas=document.getElementById("heartCanvas");
+  const ctx=canvas.getContext("2d", { alpha:true });
+
+  let W=0,H=0,DPR=1, SC=1;
+
+  function resize(){
+    DPR=Math.min(2, window.devicePixelRatio || 1);
+
+    const stage=canvas.parentElement;
+    const w=stage.clientWidth;
+    const h=stage.clientHeight;
+
+    const s = Math.min(w, h) * 0.90;
+    const px = Math.max(280, Math.min(450, s));
+
+    W = H = Math.round(px * DPR);
+    canvas.width = W;
+    canvas.height = H;
+    canvas.style.width = px + "px";
+    canvas.style.height = px + "px";
+
+    SC = W * 0.305; // slightly smaller for premium spacing
+  }
+
+  window.addEventListener("resize", resize, {passive:true});
+  resize();
+
+  function spine(t){
+    const s=Math.sin(t),c=Math.cos(t);
+    return{
+      x: 16*s*s*s / 17,
+      y:-(13*c - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t)) / 17 - 0.05
+    };
+  }
+  function spineTan(t){
+    const dt=0.001,a=spine(t-dt),b=spine(t+dt);
+    const lx=b.x-a.x,ly=b.y-a.y,l=Math.sqrt(lx*lx+ly*ly)||1;
+    return{x:lx/l,y:ly/l};
+  }
+
+  const NU=84, NV=38, THICK=0.56;
+  const verts=[], tris=[];
+  for(let ui=0;ui<NU;ui++){
+    const t=(ui/NU)*Math.PI*2;
+    const sp=spine(t), tan=spineTan(t);
+    const nx2=-tan.y, ny2=tan.x;
+    const thick=THICK*(0.70+0.55*Math.pow(Math.sin(t*0.5),2));
+    for(let vi=0;vi<=NV;vi++){
+      const phi=(vi/NV)*Math.PI*2;
+      const cp=Math.cos(phi), sp2=Math.sin(phi);
+      verts.push({
+        px: sp.x + nx2*thick*cp,
+        py: sp.y + ny2*thick*cp,
+        pz: thick*sp2,
+        nx: nx2*cp, ny: ny2*cp, nz: sp2,
+        u: ui/NU, v: vi/NV
+      });
+    }
+  }
+  for(let ui=0;ui<NU;ui++){
+    for(let vi=0;vi<NV;vi++){
+      const a=ui*(NV+1)+vi, b=a+1;
+      const c=((ui+1)%NU)*(NV+1)+vi, d=c+1;
+      tris.push(a,c,b, b,c,d);
+    }
+  }
+  const triCount = tris.length/3;
+
+  function norm3(v){
+    const l=Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])||1;
+    return[v[0]/l,v[1]/l,v[2]/l];
+  }
+  const L1=norm3([-0.55,-0.70,0.85]);
+  const L2=norm3([0.80,0.20,0.50]);
+  const L3=norm3([0.00,0.60,0.80]);
+
+  let rotY=0, beltRot=0, beatT=0, beatScale=1;
+
+  // Tim xoay vừa phải, chữ xoay chậm hơn
+  const HEART_SPEED = -(Math.PI*2)/22;
+  const BELT_SPEED  = -(Math.PI*2)/44;
+
+  const TILT_X=0.22;
+  const cxT=Math.cos(TILT_X), sxT=Math.sin(TILT_X);
+
+  function rotY3(px,py,pz,cy,sy){ return[px*cy+pz*sy, py, -px*sy+pz*cy]; }
+  function rotX3(px,py,pz){ return[px, py*cxT-pz*sxT, py*sxT+pz*cxT]; }
+
+  const tv=new Float32Array(verts.length*2);
+  const tz=new Float32Array(verts.length);
+  const tnx=new Float32Array(verts.length),tny=new Float32Array(verts.length),tnz=new Float32Array(verts.length);
+
+  const triZ=new Float32Array(triCount);
+  const triIdx=new Uint32Array(triCount);
+
+  // ambient particles
+  const pts=Array.from({length:26},()=>( {
+    a:Math.random()*Math.PI*2, r:0.62+Math.random()*0.42,
+    s:0.0020+Math.random()*0.0033, sz:0.9+Math.random()*1.6,
+    o:0.16+Math.random()*0.38, ph:Math.random()*Math.PI*2, gold:Math.random()>0.52
+  }));
+
+const BELT_TXT=" ✦ Chúc mừng ngày Quốc tế Phụ nữ ✦ Trung tâm FRM ✦ Chúc mừng ngày Quốc tế Phụ nữ ✦ Trung tâm FRM ✦ Chúc mừng ngày Quốc tế Phụ nữ ✦ Trung tâm FRM ";
+
+  let lastTs=0;
+
+  function smoothstep(edge0,edge1,x){
+    const t=Math.max(0,Math.min(1,(x-edge0)/(edge1-edge0)));
+    return t*t*(3-2*t);
+  }
+
+  function project3(px,py){ return [W*0.5 + px*SC, H*0.5 + py*SC]; }
+
+  function drawParticles(ts){
+    const t=ts*0.001;
+    for(const p of pts){
+      p.a+=p.s;
+      const x=W*0.5+Math.cos(p.a)*p.r*SC*0.95;
+      const y=H*0.5+Math.sin(p.a*1.1)*p.r*SC*0.70;
+      const tw=0.35+0.65*Math.abs(Math.sin(t*2.2+p.ph));
+      const al=p.o*tw;
+      const[r,g,b]=p.gold?[248,210,140]:[255,106,171];
+
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(${r},${g},${b},${al})`;
+      ctx.arc(x,y,p.sz*DPR,0,Math.PI*2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(${r},${g},${b},${al*0.12})`;
+      ctx.arc(x,y,p.sz*DPR*4.6,0,Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function drawBelt(cy,sy){
+    const beltAngle = beltRot;
+    const chars = BELT_TXT.split("").join(" ").split("");
+    const nC = chars.length;
+
+    const R  = 1.48;
+    const yOffset = 0.30;
+    const angStep = (Math.PI*2)/nC;
+    const centerOffset = -(nC * angStep) / 2;
+
+    const fSize = Math.round(11.2*DPR);
+    ctx.font = `600 ${fSize}px 'DM Sans',sans-serif`;
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+
+    const items = [];
+    const da = 0.02;
+
+    for(let i=0;i<nC;i++){
+      const a = beltAngle + centerOffset + i*angStep;
+
+      function beltPoint(angle){
+        let x = R*Math.sin(angle);
+        let y = yOffset;
+        let z = R*Math.cos(angle);
+
+        const xr = x*cy + z*sy;
+        const zr = -x*sy + z*cy;
+        x = xr; z = zr;
+
+        const yr = y*cxT - z*sxT;
+        const zr2= y*sxT + z*cxT;
+        y = yr; z = zr2;
+
+        return [x,y,z];
+      }
+
+      const p0 = beltPoint(a);
+      const p1 = beltPoint(a + da);
+
+      const s0 = project3(p0[0],p0[1]);
+      const s1 = project3(p1[0],p1[1]);
+
+      const depth = (p0[2]/R);
+      const fade  = smoothstep(-0.16, 0.18, depth);
+      if(fade <= 0.01) continue;
+
+      const dx = (s1[0]-s0[0]);
+      const dy = (s1[1]-s0[1]);
+      const charRot = Math.atan2(dy, dx);
+
+      items.push({
+        ch: chars[i],
+        sx: s0[0],
+        sy: s0[1],
+        depth,
+        fade,
+        rot: charRot,
+        z: p0[2]
+      });
+    }
+
+    items.sort((a,b)=>a.z-b.z);
+
+    for(const cd of items){
+      const t = Math.max(0, cd.depth);
+      const pScale = 0.74 + 0.34*t;
+
+      const r = Math.round(200 + t*52);
+      const g = Math.round(82  + t*150);
+      const b = Math.round(145 - t*85);
+
+      ctx.save();
+      ctx.translate(cd.sx, cd.sy);
+      ctx.rotate(cd.rot);
+      ctx.scale(pScale, pScale);
+
+      const shimmer = 0.06*Math.sin((beltAngle*2.2) + (cd.z*1.7)) + 0.04;
+      const alpha = Math.min(1, (0.20 + t*0.72 + shimmer) * cd.fade);
+
+      if(cd.depth>0.55){
+        ctx.shadowColor = `rgba(248,235,180,${((cd.depth-0.55)*0.9).toFixed(2)})`;
+        ctx.shadowBlur = 7*DPR;
+      }else{
+        ctx.shadowBlur = 0;
+      }
+
+      ctx.fillStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+      ctx.fillText(cd.ch, 0, 0);
+
+      ctx.restore();
+    }
+  }
+
+  function frame(ts){
+    const dt=Math.min((ts-lastTs)*0.001,0.05);
+    lastTs=ts;
+
+    /* ✅ Reduce motion: still animate, but slower */
+    const speedMul = prefersReduce ? 0.15 : 1.0;
+    rotY    += HEART_SPEED * dt * speedMul;
+    beltRot += BELT_SPEED  * dt * speedMul;
+    beatT   += dt * speedMul;
+
+    // Softer heartbeat (premium)
+    const bf = (beatT % 3.8);
+    if (bf < 0.12) beatScale = 1 + (bf/0.12)*0.032;
+    else if (bf < 0.26) beatScale = 1.032 - ((bf-0.12)/0.14)*0.048;
+    else if (bf < 0.40) beatScale = 0.984 + ((bf-0.26)/0.14)*0.036;
+    else if (bf < 0.58) beatScale = 1.020 - ((bf-0.40)/0.18)*0.020;
+    else beatScale = 1.0;
+
+    const cy=Math.cos(rotY), sy=Math.sin(rotY);
+
+    ctx.clearRect(0,0,W,H);
+
+    // Deep glow behind heart
+    const g0=ctx.createRadialGradient(W*.5,H*.52,0,W*.5,H*.52,W*.48);
+    g0.addColorStop(0,"rgba(255,106,171,0.15)");
+    g0.addColorStop(0.40,"rgba(248,235,191,0.06)");
+    g0.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=g0;
+    ctx.fillRect(0,0,W,H);
+
+    // Transform vertices
+    for(let i=0;i<verts.length;i++){
+      const v=verts[i];
+
+      let [px,py,pz]=rotY3(v.px*beatScale,v.py*beatScale,v.pz*beatScale,cy,sy);
+      [px,py,pz]=rotX3(px,py,pz);
+
+      tv[i*2]   = W*0.5 + px*SC;
+      tv[i*2+1] = H*0.5 + py*SC;
+      tz[i]     = pz;
+
+      let [nx,ny,nz]=rotY3(v.nx,v.ny,v.nz,cy,sy);
+      [nx,ny,nz]=rotX3(nx,ny,nz);
+
+      tnx[i]=nx; tny[i]=ny; tnz[i]=nz;
+    }
+
+    // Depth sort
+    for(let ti=0;ti<triCount;ti++){
+      const ia=tris[ti*3], ib=tris[ti*3+1], ic=tris[ti*3+2];
+      triZ[ti] = (tz[ia]+tz[ib]+tz[ic])/3;
+      triIdx[ti]=ti;
+    }
+    triIdx.sort((a,b)=>triZ[a]-triZ[b]);
+
+    // Draw heart triangles
+    for(let k=0;k<triCount;k++){
+      const ti=triIdx[k];
+      const ia=tris[ti*3], ib=tris[ti*3+1], ic=tris[ti*3+2];
+
+      const ax=tv[ia*2], ay=tv[ia*2+1];
+      const bx=tv[ib*2], by=tv[ib*2+1];
+      const cx2=tv[ic*2], cy2=tv[ic*2+1];
+
+      if((bx-ax)*(cy2-ay)-(by-ay)*(cx2-ax)<0) continue;
+
+      const nx=(tnx[ia]+tnx[ib]+tnx[ic])/3;
+      const ny=(tny[ia]+tny[ib]+tny[ic])/3;
+      const nz=(tnz[ia]+tnz[ib]+tnz[ic])/3;
+
+      const d1=Math.max(0,nx*L1[0]+ny*L1[1]+nz*L1[2]);
+      const d2=Math.max(0,nx*L2[0]+ny*L2[1]+nz*L2[2]);
+      const d3=Math.max(0,nx*L3[0]+ny*L3[1]+nz*L3[2]);
+
+      // Specular highlight
+      const hx=L1[0], hy=L1[1], hz=(L1[2]+1)*0.5;
+      const hl=Math.sqrt(hx*hx+hy*hy+hz*hz)||1;
+      const spec=Math.pow(Math.max(0,nx*(hx/hl)+ny*(hy/hl)+nz*(hz/hl)),36)*0.62;
+
+      // Rim warm-gold
+      const rim=Math.pow(Math.max(0,nx*0.90+nz*0.18),4)*0.74;
+
+      const u=verts[ia].u;
+      const hueShift=Math.sin(u*Math.PI*2)*0.5+0.5;
+
+      let r0=205+hueShift*38, g0=60+hueShift*24, b0=145+hueShift*32;
+
+      const ambient=0.44;
+      const light=ambient + d1*0.46 + d2*0.18 + d3*0.12;
+
+      let fr=r0*light, fg=g0*light, fb=b0*light;
+
+      fr+=spec*240; fg+=spec*190; fb+=spec*145;
+      fr+=rim*240;  fg+=rim*190;  fb+=rim*60;
+
+      ctx.beginPath();
+      ctx.moveTo(ax,ay);
+      ctx.lineTo(bx,by);
+      ctx.lineTo(cx2,cy2);
+      ctx.closePath();
+
+      ctx.fillStyle=`rgb(${Math.min(255,fr)|0},${Math.min(255,fg)|0},${Math.min(255,fb)|0})`;
+      ctx.fill();
+    }
+
+    drawBelt(cy,sy);
+    drawParticles(ts);
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
